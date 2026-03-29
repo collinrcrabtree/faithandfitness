@@ -879,7 +879,7 @@ footer {
       <div class="instructor-info">
         <h3 class="instructor-name">Michelle King</h3>
         <span class="instructor-role">Stretch</span>
-        <p class="instructor-bio">Bringing calm, intention, and presence to every session. Specializes in helping clients find ease and flexibility through mindful movement.</p>
+        <p class="instructor-bio">Bringing calm, intention, and presence to every session. Specializes in helping students find ease and flexibility through mindful movement.</p>
       </div>
     </div>
     <div class="instructor-card reveal reveal-delay-2">
@@ -985,7 +985,7 @@ footer {
     <div class="contact-form-wrap reveal reveal-delay-1">
       <h2>Send a Message</h2>
 
-      <!-- Success message shown after redirect back from FormSubmit -->
+      <!-- Success message shown in-place after submit -->
       <div class="form-success" id="form-success">
         ✦ &nbsp;Your message was sent! We'll be in touch soon.
       </div>
@@ -994,52 +994,33 @@ footer {
         FormSubmit.co delivers to faithandformfitnessstudio@outlook.com.
         FIRST SUBMISSION: FormSubmit sends a one-time activation email to that
         address — click the link in it or future submissions won't be delivered.
-
-        _next points back to your GitHub Pages URL so users land back on the
-        site after submitting. Update YOUR-USERNAME and YOUR-REPO-NAME below.
+        The form submits via fetch (AJAX) so the page never redirects.
       -->
-      <form
-        id="contact-form"
-        action="https://formsubmit.co/faithandformfitnessstudio@outlook.com"
-        method="POST"
-      >
-        <!-- FormSubmit configuration -->
-        <input type="hidden" name="_subject" value="New Message from Faith & Form">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_autoresponse" value="Thanks for reaching out to Faith & Form! We received your message and will get back to you as soon as possible. We look forward to seeing you in the studio. — The Faith & Form Team">
-
-        <!--
-          !! IMPORTANT: Replace the value below with your real GitHub Pages URL.
-          Pattern: https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/#contact
-          Example: https://faithandform.github.io/website/#contact
-        -->
-        <input type="hidden" name="_next" value="https://collinrcrabtree.github.io/faithandfitness/#contact?sent=1">
-
+      <form id="contact-form">
         <!-- Honeypot spam trap -->
         <input type="text" name="_honey" style="display:none">
 
         <div class="form-group">
-          <input type="text" name="name" placeholder=" " required>
-          <label>Your Name</label>
+          <input type="text" name="name" id="f-name" placeholder=" " required>
+          <label for="f-name">Your Name</label>
         </div>
 
         <div class="form-group">
-          <input type="email" name="email" placeholder=" " required>
-          <label>Your Email</label>
+          <input type="email" name="email" id="f-email" placeholder=" " required>
+          <label for="f-email">Your Email</label>
         </div>
 
         <div class="form-group">
-          <input type="tel" name="phone" placeholder=" ">
-          <label>Phone (optional)</label>
+          <input type="tel" name="phone" id="f-phone" placeholder=" ">
+          <label for="f-phone">Phone (optional)</label>
         </div>
 
         <div class="form-group">
-          <textarea name="message" rows="5" placeholder=" " required></textarea>
-          <label>Your Message</label>
+          <textarea name="message" id="f-message" rows="5" placeholder=" " required></textarea>
+          <label for="f-message">Your Message</label>
         </div>
 
-        <button type="submit" class="btn-primary">Send Message</button>
+        <button type="submit" class="btn-primary" id="form-submit-btn">Send Message</button>
       </form>
     </div>
   </div>
@@ -1099,17 +1080,41 @@ document.querySelectorAll('.mob-link').forEach(link => {
   });
 });
 
-// Show success message if FormSubmit redirected back with ?sent=1
-if (new URLSearchParams(window.location.search).get('sent') === '1') {
-  const msg = document.getElementById('form-success');
-  const form = document.getElementById('contact-form');
-  if (msg) msg.classList.add('visible');
-  if (form) form.style.display = 'none';
-  // Scroll to the contact section smoothly
-  document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-  // Clean up the URL without reloading
-  history.replaceState(null, '', window.location.pathname + '#contact');
-}
+// AJAX form submission — no page redirect
+const contactForm = document.getElementById('contact-form');
+const submitBtn   = document.getElementById('form-submit-btn');
+const successMsg  = document.getElementById('form-success');
+
+contactForm.addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  // Basic honeypot check
+  if (contactForm._honey && contactForm._honey.value) return;
+
+  submitBtn.textContent = 'Sending…';
+  submitBtn.disabled = true;
+
+  const data = new FormData(contactForm);
+
+  try {
+    const res = await fetch('https://formsubmit.co/ajax/faithandformfitnessstudio@outlook.com', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: data
+    });
+
+    if (res.ok) {
+      contactForm.style.display = 'none';
+      successMsg.classList.add('visible');
+    } else {
+      throw new Error('Server error');
+    }
+  } catch (err) {
+    submitBtn.textContent = 'Send Message';
+    submitBtn.disabled = false;
+    alert('Something went wrong. Please try again or email us directly at faithandformfitnessstudio@outlook.com');
+  }
+});
 
 // Scroll reveals
 const reveals = document.querySelectorAll('.reveal');
