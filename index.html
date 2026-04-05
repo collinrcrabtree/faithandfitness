@@ -239,14 +239,12 @@ body::before {
 }
 
 .hero-right { position: relative; overflow: hidden; }
-.hero-right img,
-.hero-right video {
+.hero-right img {
   width: 100%; height: 100%; object-fit: cover; display: block;
   filter: sepia(8%) brightness(0.88);
   transform: scale(1.02); transition: transform 10s ease;
 }
-.hero-right:hover img,
-.hero-right:hover video { transform: scale(1.06); }
+.hero-right:hover img { transform: scale(1.06); }
 
 /* ─── MARQUEE ─── */
 .marquee-wrap {
@@ -737,9 +735,7 @@ footer {
     </div>
   </div>
   <div class="hero-right">
-    <video autoplay muted loop playsinline>
-      <source src="images/gym.jpeg">
-    </video>
+    <img src="images/gym.jpeg" alt="Faith & Form Studio">
   </div>
 </section>
 
