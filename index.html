@@ -239,12 +239,14 @@ body::before {
 }
 
 .hero-right { position: relative; overflow: hidden; }
-.hero-right img {
+.hero-right img,
+.hero-right video {
   width: 100%; height: 100%; object-fit: cover; display: block;
   filter: sepia(8%) brightness(0.88);
   transform: scale(1.02); transition: transform 10s ease;
 }
-.hero-right:hover img { transform: scale(1.06); }
+.hero-right:hover img,
+.hero-right:hover video { transform: scale(1.06); }
 
 /* ─── MARQUEE ─── */
 .marquee-wrap {
@@ -681,7 +683,7 @@ footer {
   <a href="#classes" class="mob-link">Classes</a>
   <a href="#instructors" class="mob-link">Team</a>
   <a href="#schedule" class="mob-link">Schedule</a>
-  <a href="#contact" class="mob-link mob-cta">Contact Us</a>
+  <a href="#contact" class="mob-link mob-cta">Book Now</a>
 </div>
 
 <!-- ── NAV ── -->
@@ -695,7 +697,7 @@ footer {
     <li><a href="#classes">Classes</a></li>
     <li><a href="#instructors">Team</a></li>
     <li><a href="#schedule">Schedule</a></li>
-    <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+    <li><a href="#contact" class="nav-cta">Book Now</a></li>
   </ul>
   <button id="nav-toggle" aria-label="Open menu">
     <span></span><span></span><span></span>
@@ -735,7 +737,9 @@ footer {
     </div>
   </div>
   <div class="hero-right">
-    <img src="images/Video.mov" alt="Faith & Form Studio">
+    <video autoplay muted loop playsinline>
+      <source src="images/video.mov" type="video/mp4">
+    </video>
   </div>
 </section>
 
@@ -812,13 +816,26 @@ footer {
     </div>
   </div>
   <div class="classes-grid">
-        <div class="class-card reveal reveal-delay-1">
+    <div class="class-card reveal">
+      <div class="class-card-img"><img src="images/imageOne.jpeg" alt="Stretch class at Faith & Form"></div>
+      <div class="class-card-body">
+        <div class="class-number">01 / Mind & Body</div>
+        <h3 class="class-name">Stretch</h3>
+        <p class="class-desc">Breath-led movement to improve flexibility, focus, and inner calm. No experience necessary — our teachers meet you where you are.</p>
+        <div class="class-tags">
+          <span class="tag">All Levels</span>
+          <span class="tag">Flexibility</span>
+          <span class="tag">Mindfulness</span>
+          <span class="tag">Breathwork</span>
+        </div>
+      </div>
+    </div>
+    <div class="class-card reveal reveal-delay-1">
       <div class="class-card-img"><img src="images/imageThree.jpeg" alt="Pilates class at Faith & Form"></div>
       <div class="class-card-body">
         <div class="class-number">02 / Core & Posture</div>
-        <h3 class="class-name">FORM: Mat Pilates</h3>
-        <p class="class-desc">Low-impact, core-focused class designed to improve strength, posture, flexibility, and balance using slow, controlled movements on the mat.
-Great for beginners and all fitness levels.</p>
+        <h3 class="class-name">Mat Pilates</h3>
+        <p class="class-desc">Precise, intentional exercises that strengthen your core and build a resilient, balanced body from the inside out.</p>
         <div class="class-tags">
           <span class="tag">All Levels</span>
           <span class="tag">Core Strength</span>
@@ -831,9 +848,8 @@ Great for beginners and all fitness levels.</p>
       <div class="class-card-img"><img src="images/imageTwo.jpeg" alt="Strength Training at Faith & Form"></div>
       <div class="class-card-body">
         <div class="class-number">03 / Build & Grow</div>
-        <h3 class="class-name">FORM: Strength</h3>
-        <p class="class-desc">Fast-paced full body workout using dumbbells, strength exercises, and HIIT-style timed intervals to help you build muscle, burn energy, and improve endurance Great for all fitness levels.
-</p>
+        <h3 class="class-name">Strength Training</h3>
+        <p class="class-desc">Guided workouts scaled to your level so you can build muscle, confidence, and resilience in a safe, supportive environment.</p>
         <div class="class-tags">
           <span class="tag">All Levels</span>
           <span class="tag">Muscle Building</span>
@@ -841,22 +857,8 @@ Great for beginners and all fitness levels.</p>
           <span class="tag">Confidence</span>
         </div>
       </div>
-  </div>
-      <div class="class-card reveal">
-      <div class="class-card-img"><img src="images/imageOne.jpeg" alt="Stretch class at Faith & Form"></div>
-      <div class="class-card-body">
-        <div class="class-number">01 / Mind & Body</div>
-        <h3 class="class-name">FORM: Stretch</h3>
-        <p class="class-desc">Slow, guided stretching to increase flexibility, improve mobility, and help your body recover while feeling relaxed and refreshed.
-Join us & find your strength</p>
-        <div class="class-tags">
-          <span class="tag">All Levels</span>
-          <span class="tag">Flexibility</span>
-          <span class="tag">Mindfulness</span>
-          <span class="tag">Breathwork</span>
-        </div>
-      </div>
     </div>
+  </div>
 </section>
 
 <!-- ── INSTRUCTORS ── -->
@@ -872,26 +874,27 @@ Join us & find your strength</p>
       <div class="instructor-photo"><img src="images/cadence.jpeg" alt="Cadence King - Mat Pilates"></div>
       <div class="instructor-info">
         <h3 class="instructor-name">Cadence King</h3>
-        <span class="instructor-role">FORM: Mat Pilates</span>
+        <span class="instructor-role">Mat Pilates</span>
         <p class="instructor-bio">Passionate about helping every student discover their strength. With a warm, hands-on coaching style, every class feels personal and intentional.</p>
       </div>
     </div>
-        <div class="instructor-card reveal reveal-delay-2">
-      <div class="instructor-photo"><img src="images/kennedy2.jpeg" alt="Kennedy Creekmore - Strength Training"></div>
-      <div class="instructor-info">
-        <h3 class="instructor-name">Kennedy Creekmore</h3>
-        <span class="instructor-role">FORM: Strength</span>
-        <p class="instructor-bio">Bringing energy and precision to every session. Specializes in helping beginners feel confident and capable from their very first rep.</p>
-      </div>
-    </div>
-        <div class="instructor-card reveal reveal-delay-1">
+    <div class="instructor-card reveal reveal-delay-1">
       <div class="instructor-photo"><img src="images/michelle.jpeg" alt="Michelle King - Stretch"></div>
       <div class="instructor-info">
         <h3 class="instructor-name">Michelle King</h3>
-        <span class="instructor-role">FORM: Stretch</span>
+        <span class="instructor-role">Stretch</span>
         <p class="instructor-bio">Bringing calm, intention, and presence to every session. Specializes in helping students find ease and flexibility through mindful movement.</p>
       </div>
     </div>
+    <div class="instructor-card reveal reveal-delay-2">
+      <div class="instructor-photo"><img src="images/kennedy.jpeg" alt="Kennedy Creekmore - Strength Training"></div>
+      <div class="instructor-info">
+        <h3 class="instructor-name">Kennedy Creekmore</h3>
+        <span class="instructor-role">Strength Training</span>
+        <p class="instructor-bio">Bringing energy and precision to every session. Specializes in helping beginners feel confident and capable from their very first rep.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ── STATS ── -->
@@ -964,7 +967,7 @@ Join us & find your strength</p>
         </div>
         <div>
           <span class="detail-label">Classes</span>
-          <span class="detail-val">Mat Pilates · Strength · Stretch</span>
+          <span class="detail-val">Stretch · Pilates · Strength</span>
         </div>
         <div>
           <span class="detail-label">Levels</span>
@@ -1029,7 +1032,7 @@ Join us & find your strength</p>
 
 <!-- ── CTA ── -->
 <section class="cta">
-  <span class="section-label reveal">Begin where you are</span>
+  <span class="section-label reveal">Begin Your Journey</span>
   <h2 class="reveal">Ready to start <em>your journey?</em></h2>
   <p class="reveal">No experience needed — only an open mind and a willingness to grow. We'll take care of the rest.</p>
   <a href="#schedule" class="btn-primary reveal">Book Your First Class</a>
@@ -1039,7 +1042,7 @@ Join us & find your strength</p>
 <footer>
   <div class="footer-brand">
     <span class="wordmark">Faith & Form</span>
-    <p>A mindful fitness studio in Stearns, KY. Stretch, Mat Pilates, and Strength for every body.</p>
+    <p>A mindful fitness studio in Stearns, KY. Stretch, Pilates, and Strength for every body.</p>
   </div>
   <div class="footer-center">
     <div class="footer-divider"></div>
