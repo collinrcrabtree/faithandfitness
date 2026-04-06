@@ -746,25 +746,21 @@ footer {
 
 /* ─── TABLET / MOBILE ─── */
 @media (max-width: 768px) {
-  /* nav */
   #nav { padding: 20px 24px; }
   #nav.scrolled { padding: 14px 24px; }
   #nav-links { display: none; }
   #nav-toggle { display: flex; }
 
-  /* hero */
   #home { grid-template-columns: 1fr; height: auto; min-height: auto; }
   .hero-left { padding: 120px 24px 0; }
   .hero-left::after { display: none; }
   .hero-right { height: 72vw; }
 
-  /* hero class strip mobile */
   .hero-class-strip { flex-direction: column; }
   .hero-class-item + .hero-class-item { border-left: none; border-top: 1px solid var(--birch); padding-left: 0; }
   .hero-class-item { flex-direction: row; align-items: center; gap: 16px; padding: 18px 0; }
   .hero-class-name { font-size: 17px; }
 
-  /* about */
   #about { padding: 64px 24px; }
   .about-wrap { grid-template-columns: 1fr; gap: 28px; margin-bottom: 48px; }
   .about-divider { display: none; }
@@ -773,34 +769,24 @@ footer {
   .studio-pair-img { min-height: 65vw; }
   .studio-copy { padding: 52px 24px; }
 
-  /* classes */
   #classes { padding: 64px 24px; }
   .section-header { flex-direction: column; align-items: flex-start; gap: 10px; }
   .classes-grid { grid-template-columns: 1fr; }
 
-  /* instructors */
   #instructors { padding: 64px 24px; }
   .instructors-header { flex-direction: column; align-items: flex-start; gap: 8px; }
   .instructors-grid { grid-template-columns: 1fr; }
   .instructor-photo { aspect-ratio: 4/3; }
 
-  /* stats */
   .stats { grid-template-columns: 1fr; }
-
-  /* quote */
   .quote-banner { padding: 60px 24px; }
 
-  /* schedule */
-
-  /* contact */
   .contact-wrap { grid-template-columns: 1fr; }
   .contact-info { padding: 56px 24px; }
   .contact-form-wrap { padding: 56px 24px; }
 
-  /* cta */
   .cta { padding: 80px 24px; }
 
-  /* footer */
   footer { grid-template-columns: 1fr; padding: 48px 24px; gap: 32px; }
   .footer-links { align-items: flex-start; }
   .footer-center { text-align: left; }
@@ -851,7 +837,6 @@ footer {
       <a href="#classes" class="btn-ghost">Explore Classes</a>
     </div>
 
-    <!-- CLASS TYPE STRIP -->
     <div class="hero-class-strip">
       <a href="#classes" class="hero-class-item">
         <span class="hero-class-num">01</span>
@@ -1082,6 +1067,13 @@ footer {
           </div>
         </div>
         <div class="schedule-info-item">
+          <span class="schedule-info-icon">◎</span>
+          <div>
+            <h4>What do I need to bring to class?</h4>
+            <p>Yourself. That's all. We've got you covered — mats, equipment, and anything in between — so you can focus on your workout, build strength, and enjoy every moment of class.</p>
+          </div>
+        </div>
+        <div class="schedule-info-item">
           <span class="schedule-info-icon">✦</span>
           <div>
             <h4>Questions?</h4>
@@ -1166,19 +1158,11 @@ footer {
     <div class="contact-form-wrap reveal reveal-delay-1">
       <h2>Send a Message</h2>
 
-      <!-- Success message shown in-place after submit -->
       <div class="form-success" id="form-success">
         ✦ &nbsp;Your message was sent! We'll be in touch soon.
       </div>
 
-      <!--
-        FormSubmit.co delivers to faithandformfitnessstudio@outlook.com.
-        FIRST SUBMISSION: FormSubmit sends a one-time activation email to that
-        address — click the link in it or future submissions won't be delivered.
-        The form submits via fetch (AJAX) so the page never redirects.
-      -->
       <form id="contact-form">
-        <!-- Honeypot spam trap -->
         <input type="text" name="_honey" style="display:none">
 
         <div class="form-group">
@@ -1234,11 +1218,9 @@ footer {
 </footer>
 
 <script>
-// Nav scroll effect
 const navEl = document.getElementById('nav');
 window.addEventListener('scroll', () => navEl.classList.toggle('scrolled', window.scrollY > 60));
 
-// Mobile menu
 const toggle = document.getElementById('nav-toggle');
 const mobileMenu = document.getElementById('mobile-menu');
 const closeBtn = document.getElementById('mobile-close');
@@ -1261,29 +1243,22 @@ document.querySelectorAll('.mob-link').forEach(link => {
   });
 });
 
-// AJAX form submission — no page redirect
 const contactForm = document.getElementById('contact-form');
 const submitBtn   = document.getElementById('form-submit-btn');
 const successMsg  = document.getElementById('form-success');
 
 contactForm.addEventListener('submit', async function(e) {
   e.preventDefault();
-
-  // Basic honeypot check
   if (contactForm._honey && contactForm._honey.value) return;
-
   submitBtn.textContent = 'Sending…';
   submitBtn.disabled = true;
-
   const data = new FormData(contactForm);
-
   try {
     const res = await fetch('https://formsubmit.co/ajax/faithandformfitnessstudio@outlook.com', {
       method: 'POST',
       headers: { 'Accept': 'application/json' },
       body: data
     });
-
     if (res.ok) {
       contactForm.style.display = 'none';
       successMsg.classList.add('visible');
@@ -1297,7 +1272,6 @@ contactForm.addEventListener('submit', async function(e) {
   }
 });
 
-// Scroll reveals
 const reveals = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
